@@ -1,5 +1,6 @@
 from .base import AbstractProvider
 import json
+import pkg_resources
 
 # noinspection SpellCheckingInspection
 class Crawlers(AbstractProvider):
@@ -8,7 +9,7 @@ class Crawlers(AbstractProvider):
     """
 
     def getAll(self):
-        json_file_path = "newCrawlers.json"  # путь к вашему JSON файлу
+        json_file_path = pkg_resources.resource_filename('crawlerdetect.src.providers', 'newCrawlers.json')
         with open(json_file_path, "r", encoding="utf-8") as f:
             json_data = json.load(f)
 

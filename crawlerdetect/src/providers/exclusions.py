@@ -1,5 +1,6 @@
 from .base import AbstractProvider
 import json
+import pkg_resources
 
 class Exclusions(AbstractProvider):
     """
@@ -7,7 +8,7 @@ class Exclusions(AbstractProvider):
     """
 
     def getAll(self):
-        json_file_path = "newExclusions.json"  # путь к вашему JSON файлу
+        json_file_path = pkg_resources.resource_filename('crawlerdetect.src.providers', "newExclusions.json")
         with open(json_file_path, "r", encoding="utf-8") as f:
             json_data = json.load(f)
 
