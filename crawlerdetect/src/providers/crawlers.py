@@ -1,5 +1,5 @@
 from .base import AbstractProvider
-
+import json
 
 # noinspection SpellCheckingInspection
 class Crawlers(AbstractProvider):
@@ -8,7 +8,12 @@ class Crawlers(AbstractProvider):
     """
 
     def getAll(self):
-        return [
+        json_file_path = "newCrawlers.json"  # путь к вашему JSON файлу
+        with open(json_file_path, "r", encoding="utf-8") as f:
+            json_data = json.load(f)
+
+        json_list = [rf"{item}" for item in json_data]
+        local_list = [
             r" YLT",
             r"^Aether",
             r"^Amazon Simple Notification Service Agent$",
@@ -1410,3 +1415,5 @@ class Crawlers(AbstractProvider):
             r"ZyBorg",
             r"[a-z0-9\-_]*(bot|crawl|archiver|transcoder|spider|uptime|validator|fetcher|cron|checker|reader|extractor|monitoring|analyzer|scraper)",
         ]
+
+        return list(set(local_list + json_list))
